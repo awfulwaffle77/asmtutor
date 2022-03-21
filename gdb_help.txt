@@ -1,0 +1,6 @@
+s - step
+x/3xw 0x800 - show memory contents at 0x800, 3 words(w) in hex(x)
+i r - info registers
+list - list source code
+save breakpoints 'f.brk' - save breakpoints to file
+source f.brk - load breakpoints
