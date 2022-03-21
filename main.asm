@@ -16,6 +16,21 @@ SECTION .text
 global _start
 
 _start:
+
+    ; argv[0] -> argc
+    ; argv[1] -> program name
+    ; argv[2:argv[0] - 1] -> arguments
+
+    pop eax  ; get argc in ECX
+_args:
+    cmp eax, 0
+    je _argsDone
+    pop ecx
+    call printLF
+    dec eax
+    jmp _args
+_argsDone:
+
     mov ecx, msg1
     call printLF
 

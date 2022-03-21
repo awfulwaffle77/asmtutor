@@ -25,12 +25,16 @@ finished:
 printLF:
     call _print
 
-    mov eax, 0FFh ; PLEASE REMOVE THIS. ONLY 4 TESTS
+    ;mov eax, 0FFh ; PLEASE REMOVE THIS. ONLY 4 TESTS
     push eax
-    mov eax, 0Ah
+    mov al, 36h 
+    mov ah, 0Ah
+    ; add 360Ah to all messages before printing
+    ; if we would have put mov eax, 36; push eax; mov eax, 0Ah; push eax;
+    ; it would have put two words padded with 0 on MSBs on the stack
     push eax
 
-    mov ecx, esp
+    mov ecx, esp  ; we can't just add the value 0Ah. We need a memory address
     call _print
     
     pop eax
@@ -46,7 +50,7 @@ _print:
     push ecx
     push edx
     push ebx
-    push eax    ; we pop it atm to see what is happening !! OBSERVE that we do not pop this
+    push eax    ; i guess this is fine; we pop it atm to see what is happening !! OBSERVE that we do not pop this
 
     mov ebx, ecx  ; because strlen expects msg to be in ebx
     call strlen
